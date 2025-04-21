@@ -23,27 +23,28 @@
 ```go
 package main
 
+import (
+	"github.com/fiveyoboy/plusgorm"
+)
 
-import ""
-
-func main(){
-    plusgorm := NewPlusGorm(&DBConfig{
-		Name:         "test",
-		Host:         "127.0.0.1",
-		Port:         3306,
-		User:         "root",
-		Password:     "123456",
+func main() {
+	pg := plusgorm.NewPlusGorm(&plusgorm.DBConfig{
+		Name:     "test",
+		Host:     "127.0.0.1",
+		Port:     3306,
+		User:     "root",
+		Password: "123456",
 	})
-	err := plusgorm.TableToStruct("test_tb", &TableToStructConfig{
+	err := pg.TableToStruct("test_tb", &plusgorm.TableToStructConfig{
 		Stdout:         false,
 		FilePath:       "./table.go",
 		MysqlGoTypeMap: nil,
 	})
 	if err != nil {
-		t.Logf("err:%v", err)
 		return
 	}
 }
+
 ```
 
 > 将会在当前目录下 创建 table.go 文件
